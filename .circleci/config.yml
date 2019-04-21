@@ -19,14 +19,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dependencies-{{ checksum "requirements.txt" }}
+            - deps-{{ checksum "requirements.txt" }}-{{ checksum "requirements.yml" }}
 
       - run:
-          name: Install dependencies
+          name: Install pip dependencies
           command: |
             python3 -m venv .venv
             . .venv/bin/activate
             pip install -r requirements.txt
+
+      - run:
+          name: Install ansible dependencies
+          command: ./.venv/bin/vrun ansible-galaxy install -r requirements.yml
 
       - run:
           name: Lint
@@ -35,7 +39,7 @@ jobs:
       - save_cache:
           paths:
             - ./.venv
-          key: dependencies-{{ checksum "requirements.txt" }}
+          key: deps-{{ checksum "requirements.txt" }}-{{ checksum "requirements.yml" }}
 
 workflows:
   version: 2
