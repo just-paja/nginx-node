@@ -1,43 +1,43 @@
 ---
 - name: Create directories
   file:
-    path: '{{item}}'
+    path: '{{ item }}'
     state: directory
   with_items:
-    - '{{dir_project}}'
-    - '{{dir_project_environment}}'
-    - '{{dir_project_environment_versions}}'
+    - '{{ dir_project }}'
+    - '{{ dir_project_environment }}'
+    - '{{ dir_project_environment_versions }}'
 
 - name: Get list of versions
   find:
-    paths: '{{dir_project_environment_versions}}'
+    paths: '{{ dir_project_environment_versions }}'
     file_type: directory
   register: versions
 
 - name: Set config file path
   set_fact:
-    current_version_config: '{{dir_next_version}}/local_settings.js'
+    current_version_config: '{{ dir_next_version }}/local_settings.js'
 
 - name: Create next version directory
   file:
-    path: '{{dir_next_version}}'
+    path: '{{ dir_next_version }}'
     state: directory
 
 - name: Deploy artifact
   unarchive:
-    src: '{{node_archive}}'
-    dest: '{{dir_next_version}}'
+    src: '{{ node_archive }}'
+    dest: '{{ dir_next_version }}'
     extra_opts: [--strip-components=1]
   notify:
     - reload uwsgi
 
 - name: Deploy config
   template:
-    src: '{{node_config_file}}'
-    dest: '{{current_version_config}}'
+    src: '{{ node_config_file }}'
+    dest: '{{ current_version_config }}'
   notify:
     - reload uwsgi
-  when: node_config_file != ""
+  when: node_config_file | bool
 
 - name: Install project requirements
   npm:
@@ -45,7 +45,7 @@
 
 - name: Point symlink to next version
   file:
-    src: '{{dir_next_version}}'
-    dest: '{{link_current}}'
+    src: '{{ dir_next_version }}'
+    dest: '{{ link_current }}'
     state: link
   notify: restart uwsgi
