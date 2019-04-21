@@ -30,7 +30,7 @@ jobs:
 
       - run:
           name: Lint
-          command: ./.venv/bin/vrun ansible-lint tasks/main.yml
+          command: ./.venv/bin/vrun ansible-lint **/*.yml
 
       - save_cache:
           paths:
