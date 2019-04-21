@@ -1,0 +1,13 @@
+---
+- name: Install system dependencies
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - nginx
+      - uwsgi
+      - uwsgi-plugin-v8
+      - nodejs
+      - python-certbot-nginx

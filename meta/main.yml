@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  author: Pavel Žák
+  description: Deploy your Node.js project to Nginx with minimal config
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+   - name: Ubuntu
+     versions:
+     - all
+
+  galaxy_tags:
+    - django
+    - nginx
+    - deploy
+    - uwsgi
+    - letsencrypt
+    - certbot
+    - http
+    - https
+    - nodejs
+    - npm
+
+dependencies:
+  - role: practical-ansible.certbot

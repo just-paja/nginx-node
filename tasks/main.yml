@@ -1,0 +1,26 @@
+---
+- name: Configure facts
+  set_fact:
+    dir_node_uwsgi_socket: '/run/uwsgi/app/{{node_project_name}}'
+    dir_project: '{{node_projects_directory}}/{{node_project_name}}'
+    dir_project_environment: '{{node_projects_directory}}/{{node_project_name}}/{{node_project_environment}}'
+    dir_ssl_certificate: '/etc/letsencrypt/live/{{node_server_name.split(" ")[0]}}'
+    project_config_name: 'node-{{node_project_name}}-{{node_project_environment}}'
+
+- name: More facts
+  set_fact:
+    dir_next_version: '{{dir_project_environment}}/versions/{{node_version}}'
+    dir_project_environment_versions: '{{dir_project_environment}}/versions'
+    link_current: '{{dir_project_environment}}/current'
+    node_uwsgi_socket: '{{dir_node_uwsgi_socket}}/{{node_project_environment}}'
+    node_ssl_certificate_path: '{{dir_ssl_certificate}}/fullchain.pem'
+    node_ssl_certificate_key_path: '{{dir_ssl_certificate}}/privkey.pem'
+
+  changed_when: True
+  notify:
+    - start nginx
+    - start uwsgi
+
+- include_tasks: deps.yml
+- include_tasks: deploy.yml
+- include_tasks: config.yml
