@@ -1,0 +1,2 @@
+ansible-lint==4.1.0
+vrun==0.4
