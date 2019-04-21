@@ -56,7 +56,7 @@
   notify:
     - restart uwsgi
 
-- name: Configure Lets Eencrypt
+- name: Configure Lets Encrypt
   become: true
   shell: 'certbot -n --nginx --agree-tos --domains {{ node_server_name.split(" ") | join(",") }}'
   register: certbot_result
