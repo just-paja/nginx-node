@@ -35,10 +35,15 @@
     state: link
 
 - name: Install project requirements
-  npm:
-    state: present
-    production: True
-    path: '{{ dir_next_version }}'
+  command: npm ci --production
+  args:
+    chdir: '{{ dir_next_version }}'
+  # npm module unfortunately ignores package-lock.json, we will need to use
+  # shell here
+  # npm:
+  #   state: present
+  #   production: True
+  #   path: '{{ dir_next_version }}'
 
 - name: Point symlink to next version
   file:
