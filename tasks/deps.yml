@@ -8,5 +8,4 @@
     packages:
       - nginx
       - nodejs
-      - npm
       - python-certbot-nginx
