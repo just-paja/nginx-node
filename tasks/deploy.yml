@@ -6,6 +6,7 @@
   with_items:
     - '{{ dir_project }}'
     - '{{ dir_project_environment }}'
+    - '{{ dir_project_environment_modules }}'
     - '{{ dir_project_environment_versions }}'
 
 - name: Get list of versions
@@ -26,6 +27,12 @@
     extra_opts: [--strip-components=1]
   notify:
     - restart service
+
+- name: Link environment node modules
+  file:
+    src: '{{ dir_project_environment_modules }}'
+    dest: '{{ dir_next_version }}/node_modules'
+    state: link
 
 - name: Install project requirements
   npm:

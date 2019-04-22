@@ -8,6 +8,7 @@
 - name: More facts
   set_fact:
     dir_next_version: '{{ dir_project_environment }}/versions/{{ node_version }}'
+    dir_project_environment_modules: '{{ dir_project_environment }}/node_modules'
     dir_project_environment_versions: '{{ dir_project_environment }}/versions'
     link_current: '{{ dir_project_environment }}/current'
     node_ssl_certificate_path: '{{ dir_ssl_certificate }}/fullchain.pem'
