@@ -9,7 +9,7 @@
   become: true
   template:
     src: node-nginx.conf
-    dest: '/etc/nginx/sites-available/{{ project_config_name }}.conf'
+    dest: '/etc/nginx/sites-available/{{ node_project_id }}.conf'
   when: not ssl_certificate_file.stat.exists
   notify:
     - restart nginx
@@ -18,7 +18,7 @@
   become: true
   template:
     src: node-nginx-ssl.conf
-    dest: '/etc/nginx/sites-available/{{ project_config_name }}.conf'
+    dest: '/etc/nginx/sites-available/{{ node_project_id }}.conf'
   when:
     - ssl_certificate_file.stat.exists
   notify:
@@ -27,34 +27,27 @@
 - name: Enable nginx app
   become: true
   file:
-    src: '/etc/nginx/sites-available/{{ project_config_name }}.conf'
-    dest: '/etc/nginx/sites-enabled/{{ project_config_name }}.conf'
+    src: '/etc/nginx/sites-available/{{ node_project_id }}.conf'
+    dest: '/etc/nginx/sites-enabled/{{ node_project_id }}.conf'
     state: link
   notify:
     - restart nginx
 
-- name: Create socket directory
-  become: true
-  file:
-    path: '{{ dir_node_uwsgi_socket }}'
-    state: directory
-
-- name: Configure uwsgi app
+- name: Configure as system service
   become: true
   template:
-      src: node-uwsgi.ini
-      dest: '/etc/uwsgi/apps-available/{{ project_config_name }}.ini'
+    src: systemd.service
+    dest: '{{ node_systemd_service_file }}'
   notify:
-    - restart uwsgi
+    - restart service
 
-- name: Enable uwsgi app
+- name: Enable system service
   become: true
-  file:
-      dest: '/etc/uwsgi/apps-enabled/{{ project_config_name }}.ini'
-      src: '/etc/uwsgi/apps-available/{{ project_config_name }}.ini'
-      state: link
+  systemd:
+    name: '{{ node_project_id }}'
+    enabled: true
   notify:
-    - restart uwsgi
+    - start service
 
 - name: Configure Lets Encrypt
   become: true
@@ -67,7 +60,7 @@
   become: true
   template:
     src: node-nginx-ssl.conf
-    dest: '/etc/nginx/sites-available/{{ project_config_name }}.conf'
+    dest: '/etc/nginx/sites-available/{{ node_project_id }}.conf'
   when: not ssl_certificate_file.stat.exists
   notify:
     - restart nginx

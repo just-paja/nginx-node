@@ -1,6 +1,5 @@
 ---
 galaxy_info:
-  role_name: nginx-node
   author: Pavel Žák
   description: Deploy your Node.js project to Nginx with minimal config
   license: MIT

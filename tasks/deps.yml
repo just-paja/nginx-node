@@ -7,7 +7,5 @@
   vars:
     packages:
       - nginx
-      - uwsgi
-      - uwsgi-plugin-v8
       - nodejs
       - python-certbot-nginx

@@ -14,10 +14,6 @@
     file_type: directory
   register: versions
 
-- name: Set config file path
-  set_fact:
-    current_version_config: '{{ dir_next_version }}/local_settings.js'
-
 - name: Create next version directory
   file:
     path: '{{ dir_next_version }}'
@@ -31,17 +27,10 @@
   notify:
     - reload uwsgi
 
-- name: Deploy config
-  template:
-    src: '{{ node_config_file }}'
-    dest: '{{ current_version_config }}'
-  notify:
-    - reload uwsgi
-  when: node_config_file | bool
-
 - name: Install project requirements
   npm:
     state: present
+    production: True
 
 - name: Point symlink to next version
   file:

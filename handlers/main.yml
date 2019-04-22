@@ -17,20 +17,20 @@
     name: nginx
     state: reloaded
 
-- name: start uwsgi
+- name: start service
   become: true
   service:
-    name: uwsgi
+    name: '{{ node_project_id }}'
     state: started
 
-- name: restart uwsgi
+- name: restart service
   become: true
   service:
-    name: uwsgi
+    name: '{{ node_project_id }}'
     state: restarted
 
-- name: reload uwsgi
+- name: stop service
   become: true
   service:
-    name: uwsgi
-    state: reloaded
+    name: '{{ node_project_id }}'
+    state: stopped

@@ -1,0 +1,17 @@
+[Unit]
+Description=Node.js: {{node_project_id}}
+
+[Service]
+ExecStart=/usr/bin/env npm start
+WorkingDirectory={{ link_current }}
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier={{ node_project_id }}
+User={{ node_user }}
+Group={{ node_group }}
+Environment=NODE_ENV={{ node_project_environment }} PORT={{ node_project_port }}
+
+[Install]
+WantedBy=multi-user.target
