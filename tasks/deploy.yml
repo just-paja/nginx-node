@@ -25,7 +25,7 @@
     dest: '{{ dir_next_version }}'
     extra_opts: [--strip-components=1]
   notify:
-    - reload uwsgi
+    - restart service
 
 - name: Install project requirements
   npm:
@@ -37,4 +37,4 @@
     src: '{{ dir_next_version }}'
     dest: '{{ link_current }}'
     state: link
-  notify: restart uwsgi
+  notify: restart service

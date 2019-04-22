@@ -13,13 +13,13 @@ galaxy_info:
     - django
     - nginx
     - deploy
-    - uwsgi
     - letsencrypt
     - certbot
     - http
     - https
     - nodejs
     - npm
+    - systemd
 
 dependencies:
   - role: practical-ansible.certbot
