@@ -31,6 +31,7 @@
   npm:
     state: present
     production: True
+    path: '{{ dir_next_version }}'
 
 - name: Point symlink to next version
   file:
