@@ -1,4 +1,24 @@
 ---
+- name: Verify port is defined
+  fail:
+    msg: You must define port
+  when: not node_project_port
+
+- name: Verify server name is defined
+  fail:
+    msg: You must define at least one server name
+  when: not node_server_name
+
+- name: Verify project version is defined
+  fail:
+    msg: You must define project version
+  when: not node_version
+
+- name: Verify project environment is defined
+  fail:
+    msg: You must define project environment
+  when: not node_project_environment
+
 - name: Configure facts
   set_fact:
     dir_project: '{{ node_projects_directory }}/{{ node_project_name }}'
