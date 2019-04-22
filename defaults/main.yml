@@ -14,4 +14,4 @@ node_version: '{{ lookup("env", "NODE_PROJECT_VERSION") | default("develop", tru
 node_user: 'www-data'
 node_group: '{{ node_user }}'
 node_systemd_dir: '/etc/systemd/system'
-node_systemd_service_file: '{{ node_systemd_dir }}/{{ node_project_id }}'
+node_systemd_service_file: '{{ node_systemd_dir }}/{{ node_project_id }}.service'
