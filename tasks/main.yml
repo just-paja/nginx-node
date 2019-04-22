@@ -31,6 +31,7 @@
     dir_project_environment_modules: '{{ dir_project_environment }}/node_modules'
     dir_project_environment_versions: '{{ dir_project_environment }}/versions'
     link_current: '{{ dir_project_environment }}/current'
+    node_static_dir: '{{ dir_project_environment }}/current/static'
     node_ssl_certificate_path: '{{ dir_ssl_certificate }}/fullchain.pem'
     node_ssl_certificate_key_path: '{{ dir_ssl_certificate }}/privkey.pem'
 
