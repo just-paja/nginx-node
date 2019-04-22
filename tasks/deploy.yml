@@ -28,12 +28,6 @@
   notify:
     - restart service
 
-- name: Link environment node modules
-  file:
-    src: '{{ dir_project_environment_modules }}'
-    dest: '{{ dir_next_version }}/node_modules'
-    state: link
-
 - name: Install project requirements
   command: npm ci --production
   args:
