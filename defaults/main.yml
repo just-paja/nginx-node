@@ -1,7 +1,5 @@
 ---
 node_archive: '{{ lookup("env", "NODE_ARCHIVE") }}'
-node_config_file: '{{ lookup("env", "NODE_CONFIG_FILE") }}'
-node_config: '{{ lookup("env", "NODE_CONFIG") }}'
 node_max_fileupload_size: '100M'
 node_project_environment: '{{ lookup("env", "NODE_PROJECT_ENVIRONMENT") | default("staging", true) }}'
 node_project_name: '{{ lookup("env", "NODE_PROJECT_NAME") }}'
