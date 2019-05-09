@@ -18,7 +18,7 @@ Deploy Node.js projects to Nginx with systemd. Orignial idea was to use uwsgi, b
 |----|--------|-------|-----------|
 |`node_archive`|no|(what you get from npm pack)|Path to the packaged application|
 |`node_env_config`|no||Environment variables configuration|
-|`node_group`|yes|www-data|Gropu name that runs the project on target machine|
+|`node_group`|yes|www-data|Group name that runs the project on target machine|
 |`node_max_fileupload_size`|yes|100M|Maximum file upload size for nginx|
 |`node_project_environment`|yes|staging|Project environment name|
 |`node_project_id`|no|(generated)|Project id to reference it in system settings|
