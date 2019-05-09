@@ -1,0 +1,10 @@
+---
+- name: Deploy node package
+  hosts: web
+  vars:
+    node_archive: example-{{ lookup("env", "NODE_PROJECT_VERSION") }}.tgz
+    node_project_name: 'example'
+    node_project_environment: 'staging'
+
+  roles:
+    - role: practical-ansible.nginx_node
