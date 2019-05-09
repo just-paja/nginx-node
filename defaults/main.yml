@@ -1,6 +1,6 @@
 ---
 node_archive: '{{ lookup("env", "NODE_ARCHIVE") }}'
-node_max_fileupload_size: '100M'
+node_max_fileupload_size: '1M'
 node_project_environment: '{{ lookup("env", "NODE_PROJECT_ENVIRONMENT") | default("staging", true) }}'
 node_project_name: '{{ lookup("env", "NODE_PROJECT_NAME") }}'
 node_project_id: 'node-{{ node_project_name }}-{{ node_project_environment }}'
