@@ -16,7 +16,7 @@ Deploy Node.js projects to Nginx with systemd. Orignial idea was to use uwsgi, b
 
 |name|required|default|description|
 |----|--------|-------|-----------|
-|`node_archive`|yes||Path to the packaged application|
+|`node_archive`|no|(what you get from npm pack)|Path to the packaged application|
 |`node_project_name`|yes||Name of the project|
 |`node_version`|yes||Project version|
 |`node_server_name`|yes||Hostname to reference the application
@@ -32,7 +32,6 @@ Deploy Node.js projects to Nginx with systemd. Orignial idea was to use uwsgi, b
 
 ## TODO
 
-* Pick archive based on project name and version
 * Read version from package.json
 * Read project name from package.json
 * Auto select port based on config

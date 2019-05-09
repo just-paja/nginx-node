@@ -35,6 +35,11 @@
     node_ssl_certificate_path: '{{ dir_ssl_certificate }}/fullchain.pem'
     node_ssl_certificate_key_path: '{{ dir_ssl_certificate }}/privkey.pem'
 
+- name: Guess archive location
+  set_fact:
+    node_archive: '{{ node_project_name }}-{{ node_version }}.tgz'
+  when: not node_archive
+
   changed_when: True
   notify:
     - start nginx
