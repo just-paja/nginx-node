@@ -14,7 +14,7 @@ Deploy Node.js projects to Nginx with systemd. Orignial idea was to use uwsgi, b
 
 ## Variables
 
-|name|required|default|description|
+|Name|Required|Default|Description|
 |----|--------|-------|-----------|
 |`node_archive`|no|(what you get from npm pack)|Path to the packaged application|
 |`node_env_config`|no||Environment variables configuration|
