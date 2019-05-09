@@ -16,19 +16,26 @@ Deploy Node.js projects to Nginx with systemd. Orignial idea was to use uwsgi, b
 
 |Name|Required|Default|Description|
 |----|--------|-------|-----------|
-|`node_archive`|no|(what you get from npm pack)|Path to the packaged application|
-|`node_env_config`|no||Environment variables configuration|
-|`node_group`|yes|www-data|Group name that runs the project on target machine|
-|`node_max_fileupload_size`|yes|100M|Maximum file upload size for nginx|
+|`node_archive`|no|(what you get from `npm pack`)|Path to the packaged application, for example 'node-application-1.0.0.tgz'. Should work with any archive ansible can unpack.|
+|`node_env_config`|no||Environment variables configuration separated by space, for example: `API_URL=http://example.com OAUTH_TOKEN=j12kkjjkdl$$`|
+|`node_max_fileupload_size`|yes|1M|Maximum file upload size for Nginx|
 |`node_project_environment`|yes|staging|Project environment name|
-|`node_project_id`|no|(generated)|Project id to reference it in system settings|
 |`node_project_name`|yes||Name of the project|
-|`node_project_port`|yes||Port to run the node project on|
-|`node_projects_directory`|yes|/var/www|Directory where you usually put projects on the target machine|
-|`node_server_name`|yes||Hostname to reference the application
-|`node_systemd_dir`|yes|/etc/systemd/system|Where your systemd services live
-|`node_user`|yes|www-data|User name that runs the project on target machine|
-|`node_version`|yes||Project version|
+|`node_project_port`|yes||Port to run the node project on, for example: `3000`|
+|`node_server_name`|yes||Hostname to reference the application, for example: `mysite.example.com,mysite.example.cz`|
+|`node_version`|yes||Project version, important for the version store on server|
+
+### Internal overrides
+
+You can override these variables, but you should never need this.
+
+|Name|Description|
+|----|-----------|
+|`node_group`|Unix group name that runs the project on target machine. Defaults to `www-data`|
+|`node_project_id`|Project id to reference it in system settings. Defaults to `node-{node_project_name}-{node_project_environment}`|
+|`node_projects_directory`|Directory where you usually put projects on the target machine. Defaults to `/var/www`|
+|`node_systemd_dir`|Where your systemd services live, defaults to `/etc/systemd/system`|
+|`node_user`|User name that runs the project on target machine. Defaults to `www-data`|
 
 ## TODO
 
