@@ -14,16 +14,14 @@
     node_version: '{{ package.version }}'
   when: not node_version
 
+- name: Set project id
+  set_fact:
+    node_project_id: '{{ node_project_name }}'
+  when: not node_project_id
+
 - name: Make project id environment safe
   set_fact:
     node_project_id: 'node-{{ node_project_id }}-{{ node_project_environment }}'
-  when: node_project_id | bool
-
-- name: Set project id
-  set_fact:
-    node_project_id: 'node-{{ node_project_name }}-{{ node_project_environment }}'
-  when: not node_project_id
-
 
 - name: Verify port is defined
   fail:
