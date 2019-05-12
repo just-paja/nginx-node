@@ -1,4 +1,25 @@
 ---
+- name: Read package.json
+  include_vars:
+      file: package.json
+      name: package
+
+- name: Set project name
+  set_fact:
+    node_project_name: package.name
+  when: not node_project_name
+
+- name: Set project version
+  set_fact:
+    node_version: package.version
+  when: not node_version
+
+- name: Set project id
+  set_fact:
+    node_project_id: 'node-{{ node_project_name }}-{{ node_project_environment }}'
+  when: not node_project_id
+
+
 - name: Verify port is defined
   fail:
     msg: You must define port
@@ -19,25 +40,6 @@
     msg: You must define project environment
   when: not node_project_environment
 
-- name: Read package.json
-  include_vars:
-      file: package.json
-      name: package
-
-- name: Set project name
-  set_fact:
-    node_project_name: package.name
-  when: not node_project_name
-
-- name: Set project version
-  set_fact:
-    node_version: package.version
-  when: not node_version
-
-- name: Set project id
-  set_fact:
-    node_project_id: 'node-{{ node_project_name }}-{{ node_project_environment }}'
-  when: not node_project_id
 
 - name: Configure directories
   set_fact:
