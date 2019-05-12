@@ -19,13 +19,33 @@
     msg: You must define project environment
   when: not node_project_environment
 
-- name: Configure facts
+- name: Read package.json
+  include_vars:
+      file: package.json
+      name: package
+
+- name: Set project name
+  set_fact:
+    node_project_name: package.name
+  when: not node_project_name
+
+- name: Set project version
+  set_fact:
+    node_version: package.version
+  when: not node_version
+
+- name: Set project id
+  set_fact:
+    node_project_id: 'node-{{ node_project_name }}-{{ node_project_environment }}'
+  when: not node_project_id
+
+- name: Configure directories
   set_fact:
     dir_project: '{{ node_projects_directory }}/{{ node_project_name }}'
     dir_project_environment: '{{ node_projects_directory }}/{{ node_project_name }}/{{ node_project_environment }}'
     dir_ssl_certificate: '/etc/letsencrypt/live/{{ node_server_name.split(" ")[0] }}'
 
-- name: More facts
+- name: Configure paths
   set_fact:
     dir_next_version: '{{ dir_project_environment }}/versions/{{ node_version }}'
     dir_project_environment_modules: '{{ dir_project_environment }}/node_modules'
@@ -34,6 +54,7 @@
     node_static_dir: '{{ dir_project_environment }}/current/static'
     node_ssl_certificate_path: '{{ dir_ssl_certificate }}/fullchain.pem'
     node_ssl_certificate_key_path: '{{ dir_ssl_certificate }}/privkey.pem'
+    node_systemd_service_file: '{{ node_systemd_dir }}/{{ node_project_id }}.service'
 
 - name: Guess archive location
   set_fact:
