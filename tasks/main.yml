@@ -6,12 +6,12 @@
 
 - name: Set project name
   set_fact:
-    node_project_name: package.name
+    node_project_name: '{{ package.name }}'
   when: not node_project_name
 
 - name: Set project version
   set_fact:
-    node_version: package.version
+    node_version: '{{ package.version }}'
   when: not node_version
 
 - name: Set project id
